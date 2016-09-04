@@ -7,7 +7,7 @@ module.exports.configure = function(config, cb) {
     (cb) => resolver.resolve(config[c], cb)
   })
 
-  async.asyncMerge(resolveFuncs, results => {
+  async.merge(resolveFuncs, results => {
     const errors = result.filter(r => r.err !== undefined)
 
     if(errors.length > 0) {
