@@ -8,7 +8,7 @@ module.exports.configure = function(config, cb) {
   )
 
   async.merge(resolveFuncs, results => {
-    const errors = result.filter(r => r.err !== undefined)
+    const errors = results.filter(r => r.err !== undefined)
 
     if(errors.length > 0) {
       cb(errors[0])
