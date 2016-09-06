@@ -8,12 +8,12 @@ It currently supports the following to provide proeprties:
 
 ###Install
 
-```npm install denvar --save```
+`npm install denvar --save`
 
 ###Usage
 
 ####Quick start
-```
+```javascript
 const denvar = require('denvar')
 denvar.configure([
     {type: 'provided', variables: {test: 123}}
@@ -26,7 +26,7 @@ denvar.configure([
 ####Multiple config's
 
 Denvar takes an array of config's which makes it possible to provide env vars from multiple sources.
-```
+```javascript
 process.env.testEnv = 456
 
 denvar.configure([
@@ -41,7 +41,7 @@ denvar.configure([
 ```
 
 When the same env var is provided in different sources it will be overridden based on the array order (higher index will override lower).
-```
+```javascript
 denvar.configure([
   {type: 'provided', variables: {override: 'firstString'}},
   {type: 'provided', variables: {override: 'secondString'}}
@@ -52,7 +52,7 @@ denvar.configure([
 
 #### Types
 #####Provided
-```
+```javascript
 denvar.configure([
   {type: 'provided', variables: {test: 123}}
 ], (err, res) => {
@@ -61,7 +61,7 @@ denvar.configure([
 ```
 
 #####File
-```
+```javascript
 fs.writeFileSync('./app.env', `testKey=testValue`)
 
 denvar.configure([
@@ -72,7 +72,7 @@ denvar.configure([
 ```
 
 #####Env
-```
+```javascript
 process.env.testEnv = 456
 
 denvar.configure([
