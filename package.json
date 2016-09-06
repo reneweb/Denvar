@@ -2,6 +2,9 @@
   "name": "Denvar",
   "version": "0.1.0",
   "author": "reneweb",
+  "scripts": {
+    "test": "./scripts/test.sh"
+  },
   "devDependencies": {
     "eslint": "^3.4.0",
     "eslint-config-airbnb": "^10.0.1",
