@@ -19,12 +19,13 @@ denvar.configure([
     {type: 'provided', variables: {test: 123}}
   ], (err, res) => {
     console.log(res.get('test')) //<- prints 123
+    console.log(res.all['test']) //<- prints 123
 })
 ```
 
 ####Multiple config's
 
-Denvar takes an array of config's so it is possible to provide env vars from multiple sources.
+Denvar takes an array of config's which makes it possible to provide env vars from multiple sources.
 ```
 process.env.testEnv = 456
 
