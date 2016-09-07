@@ -15,7 +15,7 @@ const cleanUp = f => {
 
 fs.writeFileSync('./testFile', `${keyToCheck}=${varToCheck}`)
 
-file.init({path: './testFile'}, (err, provider) => {
+file.init({path: './testFile', format: 'property'}, (err, provider) => {
   provider.read((err, res) => cleanUp(() =>
     assert.equal(res[keyToCheck], varToCheck, 'Provided variables not found / not matching.')
   ))

@@ -3,7 +3,7 @@
 Denvar is a environment variable / property management library.
 It currently supports the following to provide proeprties:
 - env (reading from process.env)
-- file (reading files in the format of `key=value`)
+- file (reading from file)
 - provided (provided in the code)
 
 ###Install
@@ -61,11 +61,15 @@ denvar.configure([
 ```
 
 #####File
+Currently there are two formats supported:
+- json
+- property (`key=value` separated by new line)
+
 ```javascript
 fs.writeFileSync('./app.env', `testKey=testValue`)
 
 denvar.configure([
-  {type: 'file', path: './app.env'}
+  {type: 'file', format: 'property', path: './app.env'}
 ], (err, res) => {
   console.log(res.get('testKey')) //<- prints 'testValue'
 })
