@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "author": "reneweb",
   "scripts": {
-    "test": "./scripts/test.sh"
+    "test": "./scripts/test.sh && ./node_modules/.bin/eslint .",
+    "lint": "./node_modules/.bin/eslint ."
   },
   "devDependencies": {
     "eslint": "^3.4.0",
