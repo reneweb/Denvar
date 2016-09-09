@@ -1,7 +1,11 @@
 {
   "name": "dvar",
   "version": "0.1.2",
-  "author": "reneweb https://github.com/reneweb/dvar",
+  "author": "reneweb (https://github.com/reneweb/dvar)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reneweb/dvar"
+  },
   "scripts": {
     "test": "./scripts/test.sh && ./node_modules/.bin/eslint .",
     "lint": "./node_modules/.bin/eslint ."
