@@ -51,6 +51,7 @@ dvar.configure([
 ```
 
 #### Types
+
 #####Provided
 ```javascript
 dvar.configure([
