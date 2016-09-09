@@ -1,9 +1,9 @@
 const assert = require('assert')
-const denvar = require('../index')
+const dvar = require('../index')
 
 const tests = {
   shouldProvideEnvVarsBasedOnConfig: () => {
-    denvar.configure([{type: 'provided', variables: {test: 123}}], (err, res) => {
+    dvar.configure([{type: 'provided', variables: {test: 123}}], (err, res) => {
       assert.equal(res.get('test'), 123)
     })
   },
@@ -11,7 +11,7 @@ const tests = {
   shouldProvideEnvVarsFromMultipleSources: () => {
     process.env.testEnv = 456
 
-    denvar.configure([
+    dvar.configure([
       {type: 'provided', variables: {test: 123}},
       {type: 'env'},
       {type: 'provided', variables: {anotherOne: 'someString'}}
@@ -25,7 +25,7 @@ const tests = {
   shouldOverrideProvidedEnvVarsBasedOnConfigOrder: () => {
     process.env.test = 456
 
-    denvar.configure([
+    dvar.configure([
       {type: 'provided', variables: {test: 123, anotherOne: 'firstString', noChange: true}},
       {type: 'env'},
       {type: 'provided', variables: {anotherOne: 'someString'}}
@@ -37,7 +37,7 @@ const tests = {
   },
 
   shouldFailIfUnknownProvider: () => {
-    denvar.configure([
+    dvar.configure([
       {type: 'non-existent-provider'}
     ], (err, res) => {
       assert.ok(err instanceof Error)
@@ -46,7 +46,7 @@ const tests = {
   },
 
   shouldFailIfErrorWhileReadingFromProvider: () => {
-    denvar.configure([
+    dvar.configure([
       {type: 'file', path: 'does-not-exist'}
     ], (err, res) => {
       assert.ok(err instanceof Error)

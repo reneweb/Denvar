@@ -1,7 +1,7 @@
 {
-  "name": "denvar",
+  "name": "dvar",
   "version": "0.1.0",
-  "author": "reneweb",
+  "author": "reneweb https://github.com/reneweb/dvar",
   "scripts": {
     "test": "./scripts/test.sh && ./node_modules/.bin/eslint .",
     "lint": "./node_modules/.bin/eslint ."

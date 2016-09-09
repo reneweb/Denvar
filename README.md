@@ -1,7 +1,7 @@
-#Denvar
-[![Build Status](https://travis-ci.org/reneweb/denvar.svg?branch=master)](https://travis-ci.org/reneweb/denvar)
+#dvar
+[![Build Status](https://travis-ci.org/reneweb/dvar.svg?branch=master)](https://travis-ci.org/reneweb/dvar)
 
-Denvar is a environment variable / property management library.
+dvar is a environment variable / property management library.
 It currently supports the following to provide proeprties:
 - env (reading from process.env)
 - file (reading from file)
@@ -9,14 +9,14 @@ It currently supports the following to provide proeprties:
 
 ###Install
 
-`npm install denvar --save`
+`npm install dvar --save`
 
 ###Usage
 
 ####Quick start
 ```javascript
-const denvar = require('denvar')
-denvar.configure([
+const dvar = require('dvar')
+dvar.configure([
     {type: 'provided', variables: {test: 123}}
   ], (err, res) => {
     console.log(res.get('test')) //<- prints 123
@@ -26,11 +26,11 @@ denvar.configure([
 
 ####Multiple config's
 
-Denvar takes an array of config's which makes it possible to provide env vars from multiple sources.
+dvar takes an array of config's which makes it possible to provide env vars from multiple sources.
 ```javascript
 process.env.testEnv = 456
 
-denvar.configure([
+dvar.configure([
   {type: 'provided', variables: {test: 123}},
   {type: 'env'},
   {type: 'provided', variables: {anotherOne: 'someString'}}
@@ -43,7 +43,7 @@ denvar.configure([
 
 When the same env var is provided in different sources it will be overridden based on the array order (higher index will override lower).
 ```javascript
-denvar.configure([
+dvar.configure([
   {type: 'provided', variables: {override: 'firstString'}},
   {type: 'provided', variables: {override: 'secondString'}}
 ], (err, res) => {
@@ -54,7 +54,7 @@ denvar.configure([
 #### Types
 #####Provided
 ```javascript
-denvar.configure([
+dvar.configure([
   {type: 'provided', variables: {test: 123}}
 ], (err, res) => {
   console.log(res.get('test')) //<- prints 123
@@ -69,7 +69,7 @@ Currently there are two formats supported:
 ```javascript
 fs.writeFileSync('./app.env', `testKey=testValue`)
 
-denvar.configure([
+dvar.configure([
   {type: 'file', format: 'property', path: './app.env'}
 ], (err, res) => {
   console.log(res.get('testKey')) //<- prints 'testValue'
@@ -80,7 +80,7 @@ denvar.configure([
 ```javascript
 process.env.testEnv = 456
 
-denvar.configure([
+dvar.configure([
   {type: 'env'}
 ], (err, res) => {
   console.log(res.get('testEnv')) //<- prints 456
