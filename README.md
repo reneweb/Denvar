@@ -1,5 +1,4 @@
-#dvar
-[![Build Status](https://travis-ci.org/reneweb/dvar.svg?branch=master)](https://travis-ci.org/reneweb/dvar)
+#dvar    [![Build Status](https://travis-ci.org/reneweb/dvar.svg?branch=master)](https://travis-ci.org/reneweb/dvar)
 
 dvar is a environment variable / property management library.
 It currently supports the following to provide proeprties:
