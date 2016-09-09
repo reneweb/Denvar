@@ -1,7 +1,8 @@
 #dvar    [![Build Status](https://travis-ci.org/reneweb/dvar.svg?branch=master)](https://travis-ci.org/reneweb/dvar)
 
 dvar is a environment variable / property management library.
-It currently supports the following to provide proeprties:
+It currently supports the following to provide env variables:
+
 - env (reading from process.env)
 - file (reading from file)
 - provided (provided in the code)
@@ -40,7 +41,7 @@ dvar.configure([
 })
 ```
 
-When the same env var is provided in different sources it will be overridden based on the array order (higher index will override lower).
+When the same env variable is provided in different sources it will be overridden based on the array order (higher index will override lower).
 ```javascript
 dvar.configure([
   {type: 'provided', variables: {override: 'firstString'}},
