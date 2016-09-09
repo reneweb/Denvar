@@ -1,4 +1,5 @@
 #Denvar
+[![Build Status](https://travis-ci.org/reneweb/denvar.svg?branch=master)](https://travis-ci.org/reneweb/denvar)
 
 Denvar is a environment variable / property management library.
 It currently supports the following to provide proeprties:
