@@ -1,13 +1,18 @@
-const assert = require('assert')
+const expect = require('chai').expect
 const env = require('../../../lib/provider/env')
 
-const keyToCheck = 'testKey'
-const varToCheck = 'testVar'
+describe('env', () => {
+  it('should read env vars from process.env', done => {
+    const keyToCheck = 'testKey'
+    const varToCheck = 'testVar'
 
-process.env[keyToCheck] = varToCheck
+    process.env[keyToCheck] = varToCheck
 
-env.init({}, (err, envProvider) => {
-  envProvider.read((err, res) => {
-    assert.equal(res[keyToCheck], varToCheck, 'Env variables not found / not matching.')
+    env.init({}, (err, envProvider) => {
+      envProvider.read((err, res) => {
+        expect(res[keyToCheck]).to.equal(varToCheck)
+        done()
+      })
+    })
   })
 })
