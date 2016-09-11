@@ -9,6 +9,13 @@ describe('dvar', () => {
     })
   })
 
+  it('should return all env vars when using all function', () => {
+    dvar.configure([{type: 'provided', variables: {test: 123, test2: 'hello'}}], (err, res) => {
+      expect(res.all.test).to.equal(123)
+      expect(res.all.test2).to.equal('hello')
+    })
+  })
+
   it('should provide env vars from multiple sources', () => {
     process.env.testEnv = 456
 
