@@ -44,6 +44,15 @@ describe('dvar', () => {
     })
   })
 
+  it('should replace keys if option is set', () => {
+    dvar.configure(
+      [{type: 'provided', variables: {test: 123}}],
+      {replaceKeys: key => key + '-suffix'},
+      (err, res) => {
+        expect(res.get('test-suffix')).to.equal(123)
+      })
+  })
+
   it('should fail if unknown provider', () => {
     dvar.configure([
       {type: 'non-existent-provider'}

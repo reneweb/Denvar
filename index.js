@@ -2,7 +2,12 @@ const main = require('./lib/main')
 const resolver = require('./lib/resolver')
 const async = require('./lib/async')
 
-module.exports.configure = function(config, cb) {
+module.exports.configure = function(config, options, cb) {
+  if (cb === undefined) {
+    cb = options
+    options = {}
+  }
+
   const resolveFuncs = Object.keys(config).map(c =>
     cb => resolver.resolve(config[c], cb)
   )
@@ -13,7 +18,7 @@ module.exports.configure = function(config, cb) {
     if (errors.length > 0) {
       cb(errors[0].err)
     } else {
-      main(results.map(r => r.res), cb)
+      main(results.map(r => r.res), options, cb)
     }
   })
 }
