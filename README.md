@@ -51,6 +51,21 @@ dvar.configure([
 })
 ```
 
+#### Options
+It is possible to provide a options object as the second parameter to the `config` function. If not provided defaults will be applied.
+The currently supported options are:
+- replaceKeys: Takes a function and will apply it for every key, replacing it with a new key. The key will be passed as a parameter to the function and the new key must be returned.
+- replaceValues: Same as replaceKeys for values.
+
+Example:
+
+```
+{
+  replaceKeys: key => key.replace('-D', ''),
+  replaceValues: values => String(value),
+}
+```
+
 #### Types
 
 #####Provided
