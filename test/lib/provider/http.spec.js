@@ -23,20 +23,19 @@ describe('http', () => {
 
   before(() => {
     http.createServer(function(request, response) {
-      var url = request.url;
+      var url = request.url
 
-      if(url.endsWith('json')) {
+      if (url.endsWith('json')) {
         response.end(JSON.stringify(contentJson))
-      } else if(url.endsWith('property')) {
+      } else if (url.endsWith('property')) {
         response.end(contentProperty)
-      } else if(url.endsWith('jsonNested')) {
+      } else if (url.endsWith('jsonNested')) {
         response.end(JSON.stringify(contentJsonNested))
       }
     }).listen(9111)
   })
 
   it('should request env vars from http when using property format', done => {
-
     httpProvider.init({url: 'http://localhost:9111/property', format: 'property'}, (err, provider) => {
       provider.read((err, res) => {
         expect(res[keyToCheck]).to.equal(varToCheck)
@@ -48,8 +47,6 @@ describe('http', () => {
   })
 
   it('should request env vars from http when using json format', done => {
-
-
     httpProvider.init({url: 'http://localhost:9111/json', format: 'json'}, (err, provider) => {
       provider.read((err, res) => {
         expect(res[keyToCheck]).to.equal(varToCheck)
