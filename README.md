@@ -5,7 +5,8 @@ It currently supports the following to provide env variables:
 
 - env (reading from process.env)
 - file (reading from file)
-- provided (provided in the code as Json)
+- provided (provided in the code as json)
+- http (getting from url)
 
 ###Install
 
@@ -100,5 +101,22 @@ dvar.configure([
   {type: 'env'}
 ], (err, res) => {
   console.log(res.get('testEnv')) //<- prints 456
+})
+```
+
+#####HTTP
+Currently there are two supported formats, that can be passed in the http response:
+- json
+- property (`key=value` separated by new line)
+
+```javascript
+http.createServer(function(request, response) {
+  response.end(`testKey=testValue`)
+}).listen(8080)
+
+dvar.configure([
+  {type: 'http', format: 'property', url: 'http://localhost:8080/test'}
+], (err, res) => {
+  console.log(res.get('testKey')) //<- prints 'testValue'
 })
 ```
