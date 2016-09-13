@@ -5,7 +5,7 @@ It currently supports the following to provide env variables:
 
 - env (reading from process.env)
 - file (reading from file)
-- provided (provided in the code)
+- provided (provided in the code as Json)
 
 ###Install
 
