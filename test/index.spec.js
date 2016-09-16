@@ -62,6 +62,22 @@ describe('dvar', () => {
       })
   })
 
+  it('should use override config if set before actual config', () => {
+    dvar.override(
+      [{type: 'provided', variables: {test: 'override'}}],
+      (err, res) => {
+        expect(res.get('test')).to.equal('override')
+      })
+
+    dvar.configure(
+      [{type: 'provided', variables: {test: 123}}],
+      (err, res) => {
+        expect(res.get('test')).to.equal('override')
+      })
+
+    dvar.removeOverride()
+  })
+
   it('should fail if unknown provider', () => {
     dvar.configure([
       {type: 'non-existent-provider'}
