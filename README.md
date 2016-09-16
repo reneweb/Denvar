@@ -60,7 +60,7 @@ The currently supported options are:
 
 Example:
 
-```
+```javascript
 {
   replaceKeys: key => key.replace('-D', ''),
   replaceValues: values => String(value),
@@ -69,7 +69,7 @@ Example:
 
 #### Override
 Override is a function that takes a config the same way as `configure`. When using that function all subsequent calls to `configure` will use the configuration defined in the `override` function instead of it's own. This is useful for testing, when a specific test configuration is needed. Calls to `configure` before the `override` function is called won't be affected.
-```
+```javascript
 dvar.override([
   {type: 'provided', variables: {test: 123}}
 ], (err, res) => {
