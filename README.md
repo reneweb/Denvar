@@ -29,6 +29,8 @@ dvar.configure([
 
 dvar takes an array of config's which makes it possible to provide env vars from multiple sources.
 ```javascript
+const dvar = require('dvar')
+
 process.env.testEnv = 456
 
 dvar.configure([
@@ -44,6 +46,8 @@ dvar.configure([
 
 When the same env variable is provided in different sources it will be overridden based on the array order (higher index will override lower).
 ```javascript
+const dvar = require('dvar')
+
 dvar.configure([
   {type: 'provided', variables: {override: 'firstString'}},
   {type: 'provided', variables: {override: 'secondString'}}
@@ -71,6 +75,8 @@ Example:
 
 #####Provided
 ```javascript
+const dvar = require('dvar')
+
 dvar.configure([
   {type: 'provided', variables: {test: 123}}
 ], (err, res) => {
@@ -84,6 +90,9 @@ Currently there are two formats supported:
 - property (`key=value` separated by new line)
 
 ```javascript
+const dvar = require('dvar')
+const fs = require('fs')
+
 fs.writeFileSync('./app.env', `testKey=testValue`)
 
 dvar.configure([
@@ -95,6 +104,8 @@ dvar.configure([
 
 #####Env
 ```javascript
+const dvar = require('dvar')
+
 process.env.testEnv = 456
 
 dvar.configure([
@@ -110,6 +121,9 @@ Currently there are two supported formats, that can be passed in the http respon
 - property (`key=value` separated by new line)
 
 ```javascript
+const dvar = require('dvar')
+const http = require('http')
+
 http.createServer(function(request, response) {
   response.end(`testKey=testValue`)
 }).listen(8080)
@@ -124,6 +138,8 @@ dvar.configure([
 #### Override
 Override is a function that takes a config the same way as `configure`. When using that function all subsequent calls to `configure` will use the configuration defined in the `override` function instead of it's own. This is useful for testing, when a specific test configuration is needed. Calls to `configure` before the `override` function is called won't be affected.
 ```javascript
+const dvar = require('dvar')
+
 dvar.override([
   {type: 'provided', variables: {test: 123}}
 ], (err, res) => {
