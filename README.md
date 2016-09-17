@@ -67,24 +67,6 @@ Example:
 }
 ```
 
-#### Override
-Override is a function that takes a config the same way as `configure`. When using that function all subsequent calls to `configure` will use the configuration defined in the `override` function instead of it's own. This is useful for testing, when a specific test configuration is needed. Calls to `configure` before the `override` function is called won't be affected.
-```javascript
-dvar.override([
-  {type: 'provided', variables: {test: 123}}
-], (err, res) => {
-  console.log(res.get('test')) //<- prints 123
-
-  dvar.configure([
-    {type: 'provided', variables: {test: 456}}
-  ], (err, res) => {
-    console.log(res.get('test')) //<- prints 123
-  })
-})
-```
-
-To remove a override config there is a function `removeOverride`. This will cause all subsequent calls to `configure` to use their own configuration instead of the one provided by `override`. The `configure` calls done before the `removeOverride` will still use the override configuration though.
-
 #### Types
 
 #####Provided
@@ -138,3 +120,21 @@ dvar.configure([
   console.log(res.get('testKey')) //<- prints 'testValue'
 })
 ```
+
+#### Override
+Override is a function that takes a config the same way as `configure`. When using that function all subsequent calls to `configure` will use the configuration defined in the `override` function instead of it's own. This is useful for testing, when a specific test configuration is needed. Calls to `configure` before the `override` function is called won't be affected.
+```javascript
+dvar.override([
+  {type: 'provided', variables: {test: 123}}
+], (err, res) => {
+  console.log(res.get('test')) //<- prints 123
+
+  dvar.configure([
+    {type: 'provided', variables: {test: 456}}
+  ], (err, res) => {
+    console.log(res.get('test')) //<- prints 123
+  })
+})
+```
+
+To remove a override config there is a function `removeOverride`. This will cause all subsequent calls to `configure` to use their own configuration instead of the one provided by `override`. The `configure` calls done before the `removeOverride` will still use the override configuration though.
