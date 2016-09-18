@@ -154,3 +154,22 @@ dvar.override([
 ```
 
 To remove a override config there is a function `removeOverride`. This will cause all subsequent calls to `configure` to use their own configuration instead of the one provided by `override`. The `configure` calls done before the `removeOverride` will still use the override configuration though.
+
+#### Extensions
+Additional providers can be added using extensions.
+
+```javascript
+const dvar = require('dvar')
+
+dvar.addExtension('provided', {init: (config, cb) => {
+  const readF = cb => cb(null, {test: 123})
+  cb(null, {read: readF})
+}}).configure([
+  {type: 'provided'}
+], (err, res) => {
+  expect(res.get('test')).to.equal(123)
+})
+```
+
+As you can see in the example the `addExtension` function takes the name of the extension and the actual extension / provider.
+The extension must have a `init` function that takes the config (As defined in the `configure` call) and a callback function. On success the callback function must return another function `read` that will read the configuration.
