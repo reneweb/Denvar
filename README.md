@@ -161,13 +161,13 @@ Additional providers can be added using extensions.
 ```javascript
 const dvar = require('dvar')
 
-dvar.addExtension('provided', {init: (config, cb) => {
+dvar.addExtension('myExtension', {init: (config, cb) => {
   const readF = cb => cb(null, {test: 123})
   cb(null, {read: readF})
 }}).configure([
-  {type: 'provided'}
+  {type: 'myExtension'}
 ], (err, res) => {
-  expect(res.get('test')).to.equal(123)
+  console.log(res.get('test')) //<- prints 123
 })
 ```
 
