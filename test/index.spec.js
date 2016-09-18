@@ -78,6 +78,28 @@ describe('dvar', () => {
     dvar.removeOverride()
   })
 
+  it('should use extension when registered and used', () => {
+    dvar.addExtension('myExt', {init: (config, cb) => {
+      const readF = cb => cb(null, {test: 123})
+      cb(null, {read: readF})
+    }}).configure([
+      {type: 'myExt'}
+    ], (err, res) => {
+      expect(res.get('test')).to.equal(123)
+    })
+  })
+
+  it('should use extension in place of other provider is same type', () => {
+    dvar.addExtension('provided', {init: (config, cb) => {
+      const readF = cb => cb(null, {test: 123})
+      cb(null, {read: readF})
+    }}).configure([
+      {type: 'provided'}
+    ], (err, res) => {
+      expect(res.get('test')).to.equal(123)
+    })
+  })
+
   it('should fail if unknown provider', () => {
     dvar.configure([
       {type: 'non-existent-provider'}

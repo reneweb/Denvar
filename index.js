@@ -2,9 +2,12 @@ const main = require('./lib/main')
 const resolver = require('./lib/resolver')
 const async = require('./lib/async')
 
+var overrideConfig
+var extensions = {}
+
 function _configure(config, options, cb) {
   const resolveFuncs = Object.keys(config).map(c =>
-    cb => resolver.resolve(config[c], cb)
+    cb => resolver.resolve(config[c], extensions, cb)
   )
 
   async.merge(resolveFuncs, results => {
@@ -18,7 +21,10 @@ function _configure(config, options, cb) {
   })
 }
 
-var overrideConfig
+module.exports.addExtension = (type, extension) => {
+  extensions[type] = extension
+  return this
+}
 
 module.exports.configure = (config, options, cb) => {
   if (cb === undefined) {
