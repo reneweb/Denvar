@@ -11,8 +11,8 @@ describe('dvar', () => {
 
   it('should return all env vars when using all function', () => {
     dvar.configure([{type: 'provided', variables: {test: 123, test2: 'hello'}}], (err, res) => {
-      expect(res.all.test).to.equal(123)
-      expect(res.all.test2).to.equal('hello')
+      expect(res.all().test).to.equal(123)
+      expect(res.all().test2).to.equal('hello')
     })
   })
 
@@ -97,6 +97,32 @@ describe('dvar', () => {
       {type: 'provided'}
     ], (err, res) => {
       expect(res.get('test')).to.equal(123)
+    })
+  })
+
+  it('should dynamically reload the config is option is set', done => {
+    const fs = require('fs')
+
+    fs.writeFileSync('./testFile', 'testKey=testValue')
+
+    dvar.configure([
+      {type: 'file', format: 'property', path: './testFile'}
+    ], {
+      dynamic: {
+        interval: 10
+      }
+    }, (err, res) => {
+      expect(res.get('testKey')).to.equal('testValue')
+      expect(res.all().testKey).to.equal('testValue')
+
+      fs.writeFileSync('./testFile', 'testKey=dynamicallyChangedtestValue')
+
+      setTimeout(() => {
+        expect(res.get('testKey')).to.equal('dynamicallyChangedtestValue')
+        expect(res.all().testKey).to.equal('dynamicallyChangedtestValue')
+        fs.unlinkSync('./testFile')
+        done()
+      }, 12)
     })
   })
 
