@@ -21,7 +21,7 @@ dvar.configure([
     {type: 'provided', variables: {test: 123}}
   ], (err, res) => {
     console.log(res.get('test')) //<- prints 123
-    console.log(res.all['test']) //<- prints 123
+    console.log(res.all()['test']) //<- prints 123
 })
 ```
 
@@ -61,6 +61,7 @@ It is possible to provide a options object as the second parameter to the `confi
 The currently supported options are:
 - replaceKeys: Takes a function and will apply it for every key, replacing it with a new key. The key will be passed as a parameter to the function and the new key must be returned.
 - replaceValues: Same as replaceKeys for values.
+- dynamic: setting this option to a truthy value will enable dynamic reloading of the configuration. See more here
 
 Example:
 
@@ -132,6 +133,33 @@ dvar.configure([
   {type: 'http', format: 'property', url: 'http://localhost:8080/test'}
 ], (err, res) => {
   console.log(res.get('testKey')) //<- prints 'testValue'
+})
+```
+
+#### Dynamic reloading
+
+Dynamic reloading of the configuration can be enabled by setting the `dynamic` option to a truthy value. By default it will poll for configuration changes every minute. When setting the `dynamic` field to a object, an `interval` option (in ms) can be passed to it.
+
+```javascript
+const dvar = require('dvar')
+const fs = require('fs')
+
+fs.writeFileSync('./testFile', 'testKey=testValue')
+
+dvar.configure([
+  {type: 'file', format: 'property', path: './testFile'}
+], {
+  dynamic: {
+    interval: 10 //in ms
+  }
+}, (err, res) => {
+  console.log(res.get('testKey')) //<- prints testValue
+
+  fs.writeFileSync('./testFile', 'testKey=dynamicallyChangedTestValue')
+
+  setTimeout(() => {
+    console.log(res.get('testKey')) //<- prints dynamicallyChangedTestValue
+  }, 12)
 })
 ```
 
