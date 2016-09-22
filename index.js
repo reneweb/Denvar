@@ -28,7 +28,7 @@ module.exports.addExtension = (type, extension) => {
 
 module.exports.configure = (config, options, cb) => {
   if (cb === undefined) {
-    cb = options
+    cb = options === undefined ? () => {} : options
     options = {}
   }
 
@@ -41,7 +41,7 @@ module.exports.configure = (config, options, cb) => {
 
 module.exports.override = (config, options, cb) => {
   if (cb === undefined) {
-    cb = options
+    cb = options === undefined ? () => {} : options
     options = {}
   }
 
@@ -56,3 +56,6 @@ module.exports.override = (config, options, cb) => {
 module.exports.removeOverride = () => {
   overrideConfig = undefined
 }
+
+module.exports.on = (event, cb) => main.eventEmitter.on(event, cb)
+module.exports.once = (event, cb) => main.eventEmitter.once(event, cb)

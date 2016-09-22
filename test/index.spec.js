@@ -100,7 +100,7 @@ describe('dvar', () => {
     })
   })
 
-  it('should dynamically reload the config is option is set', done => {
+  it('should dynamically reload the config if option is set', done => {
     const fs = require('fs')
 
     fs.writeFileSync('./testFile', 'testKey=testValue')
@@ -124,6 +124,43 @@ describe('dvar', () => {
         done()
       }, 12)
     })
+  })
+
+  it('should fire loaded event when config successfully loaded', done => {
+    dvar.once('loaded', values => {
+      expect(values.test).to.equal(123)
+      done()
+    })
+    dvar.configure([{type: 'provided', variables: {test: 123}}], (err, res) => {})
+  })
+
+  it('should fire update event when config dynamically update', done => {
+    const fs = require('fs')
+
+    fs.writeFileSync('./testFile', 'testKey=testValue')
+
+    dvar.once('updated', values => {
+      expect(values.testKey).to.equal('dynamicallyChangedtestValue')
+      fs.unlinkSync('./testFile')
+      done()
+    })
+
+    dvar.configure([
+      {type: 'file', format: 'property', path: './testFile'}
+    ], {
+      dynamic: {
+        interval: 10
+      }
+    }, (err, res) => {
+      fs.writeFileSync('./testFile', 'testKey=dynamicallyChangedtestValue')
+    })
+  })
+
+  it('should fire error event when error occurs', done => {
+    dvar.once('error', values => {
+      done()
+    })
+    dvar.configure([{type: 'file', path: 'does-not-exist'}], (err, res) => {})
   })
 
   it('should fail if unknown provider', () => {
