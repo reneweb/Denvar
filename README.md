@@ -61,7 +61,7 @@ It is possible to provide a options object as the second parameter to the `confi
 The currently supported options are:
 - replaceKeys: Takes a function and will apply it for every key, replacing it with a new key. The key will be passed as a parameter to the function and the new key must be returned.
 - replaceValues: Same as replaceKeys for values.
-- dynamic: setting this option to a truthy value will enable dynamic reloading of the configuration. See more here
+- dynamic: setting this option to a truthy value will enable dynamic reloading of the configuration. See more [here](#dynamic-reloading)
 
 Example:
 
@@ -136,7 +136,7 @@ dvar.configure([
 })
 ```
 
-#### Dynamic reloading
+####Dynamic reloading
 
 Dynamic reloading of the configuration can be enabled by setting the `dynamic` option to a truthy value. By default it will poll for configuration changes every minute. When setting the `dynamic` field to a object, an `interval` option (in ms) can be passed to it.
 
