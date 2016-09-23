@@ -131,7 +131,7 @@ describe('dvar', () => {
       expect(values.test).to.equal(123)
       done()
     })
-    dvar.configure([{type: 'provided', variables: {test: 123}}], (err, res) => {})
+    dvar.configure([{type: 'provided', variables: {test: 123}}])
   })
 
   it('should fire update event when config dynamically update', done => {
@@ -160,7 +160,7 @@ describe('dvar', () => {
     dvar.once('error', values => {
       done()
     })
-    dvar.configure([{type: 'file', path: 'does-not-exist'}], (err, res) => {})
+    dvar.configure([{type: 'file', path: 'does-not-exist'}])
   })
 
   it('should fail if unknown provider', () => {
