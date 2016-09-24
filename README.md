@@ -74,15 +74,15 @@ Example:
 
 #### Events
 The following events are emitted:
-- `loaded` - Called when the config is finished loading. Passes the values as a parameter.
+- `loaded` - Called when the config is finished loading. Passes the config values as a parameter.
 - `error` - Called when there is an error reading from a provider. Passes the error as a parameter.
-- `updated` - Called when the config is update (i.e. when the dynamic reload interval passed). Passes the new values as a parameter. This event is only fired when using dynamic reloading and will be called every time the config is reloaded no matter if the values actually changed.
+- `updated` - Called when the config is updated (i.e. when the dynamic reload interval passed). Passes the new config values as a parameter. This event is only fired when using dynamic reloading and will be called every time the config is reloaded no matter if the config actually changed from the reload.
 
 Example `loaded` event:
 ```javascript
 const dvar = require('dvar')
 dvar.once('loaded', values => {
-  console.log(res.get('test')) //<- prints 123
+  console.log(values.test) //<- prints 123
 })
 dvar.configure([{type: 'provided', variables: {test: 123}}])
 ```
