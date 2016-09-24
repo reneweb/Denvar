@@ -72,6 +72,52 @@ Example:
 }
 ```
 
+#### Events
+The following events are emitted:
+- `loaded` - Called when the config is finished loading. Passes the values as a parameter.
+- `error` - Called when there is an error reading from a provider. Passes the error as a parameter.
+- `updated` - Called when the config is update (i.e. when the dynamic reload interval passed). Passes the new values as a parameter. This event is only fired when using dynamic reloading and will be called every time the config is reloaded no matter if the values actually changed.
+
+Example `loaded` event:
+```javascript
+const dvar = require('dvar')
+dvar.once('loaded', values => {
+  console.log(res.get('test')) //<- prints 123
+})
+dvar.configure([{type: 'provided', variables: {test: 123}}])
+```
+
+Example `error` event:
+```javascript
+const dvar = require('dvar')
+dvar.once('error', err => {
+  //...
+})
+dvar.configure([{type: 'file', path: 'does-not-exist'}])
+```
+
+Example `updated` event:
+```javascript
+const dvar = require('dvar')
+const fs = require('fs')
+
+fs.writeFileSync('./testFile', 'testKey=testValue')
+
+dvar.once('updated', values => {
+  console.log(values.testKey)  //<- prints dynamicallyChangedtestValue
+})
+
+dvar.configure([
+  {type: 'file', format: 'property', path: './testFile'}
+], {
+  dynamic: {
+    interval: 10
+  }
+}, (err, res) => {
+  fs.writeFileSync('./testFile', 'testKey=dynamicallyChangedtestValue')
+})
+```
+
 #### Types
 
 #####Provided

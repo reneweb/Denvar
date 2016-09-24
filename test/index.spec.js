@@ -157,7 +157,7 @@ describe('dvar', () => {
   })
 
   it('should fire error event when error occurs', done => {
-    dvar.once('error', values => {
+    dvar.once('error', err => {
       done()
     })
     dvar.configure([{type: 'file', path: 'does-not-exist'}])
