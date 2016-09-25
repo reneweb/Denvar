@@ -1,13 +1,15 @@
 const main = require('./lib/main')
 const resolver = require('./lib/resolver')
+const envResolver = require('./lib/env_resolver')
 const async = require('./lib/async')
 
 var overrideConfig
 var extensions = {}
 
 function _configure(config, options, cb) {
-  const resolveFuncs = Object.keys(config).map(c =>
-    cb => resolver.resolve(config[c], extensions, cb)
+  const resolvedEnvConfig = envResolver.resolve(config, options)
+  const resolveFuncs = Object.keys(resolvedEnvConfig).map(c =>
+    cb => resolver.resolve(resolvedEnvConfig[c], extensions, cb)
   )
 
   async.merge(resolveFuncs, results => {
