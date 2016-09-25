@@ -61,7 +61,8 @@ It is possible to provide a options object as the second parameter to the `confi
 The currently supported options are:
 - replaceKeys: Takes a function and will apply it for every key, replacing it with a new key. The key will be passed as a parameter to the function and the new key must be returned.
 - replaceValues: Same as replaceKeys for values.
-- dynamic: setting this option to a truthy value will enable dynamic reloading of the configuration. See more [here](#dynamic-reloading)
+- env: The current environment as a string or a function that returns the environment. Only used when providing config specific for certain environments as described [here](#environment-specific-config)
+- dynamic: Setting this option to a truthy value will enable dynamic reloading of the configuration. See more [here](#dynamic-reloading)
 
 Example:
 
@@ -179,6 +180,23 @@ dvar.configure([
   {type: 'http', format: 'property', url: 'http://localhost:8080/test'}
 ], (err, res) => {
   console.log(res.get('testKey')) //<- prints 'testValue'
+})
+```
+
+####Environment specific config
+
+Instead of providing an array to the `config` function, it is also possible to pass an object to it. The key(s) should be the environment for which the config is and the value the actual config array. Further, it is possible to provide an option `env` that is used to determine the current environment that should be used. It can be either a string or a function that returns a string with the environment.
+
+```javascript
+dvar.configure({
+  staging: [{type: 'provided', variables: {staging: 123}}],
+  production: [{type: 'provided', variables: {prod: 123}}]
+}, {
+  env: () => {
+    return 'staging'
+  }
+}, (err, res) => {
+  console.log(res.get('staging')) //<- prints 123
 })
 ```
 
