@@ -8,6 +8,22 @@ It currently supports the following to provide env variables:
 - provided (provided in the code as json)
 - http (getting from url)
 
+1. [Install](#install)
+2. [Usage](#usage)
+  2.1. [Quick start](#quick-start)
+  2.2. [Multiple config's](#multiple-configs)
+3. [Options](#options)
+4. [Events](#events)
+4. [Types](#types)
+  5.1. [Provided](#provided)
+  5.2. [File](#file)
+  5.3. [Env](#env)
+  5.4. [Http](#http)
+6. [Environment specific config](#environment-specific-config)
+7. [Dynamic reloading](#dynamic-reloading)
+8. [Override](#override)
+9. [Extensions](#extensions)
+
 ###Install
 
 `npm install dvar --save`
