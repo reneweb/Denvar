@@ -1,6 +1,6 @@
 #dvar    [![Build Status](https://travis-ci.org/reneweb/dvar.svg?branch=master)](https://travis-ci.org/reneweb/dvar)
 
-dvar is a environment configuration management library.
+dvar is a configuration management library.
 It currently supports the following to provide the configuration:
 
 - env (reading from process.env)
