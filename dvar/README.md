@@ -9,6 +9,8 @@ It currently supports the following to provide the configuration:
 - http (getting from url)
 
 * * *
+
+###Quick Links
 * [Install](#install)
 * [Usage](#usage)
   * [Quick start](#quick-start)
