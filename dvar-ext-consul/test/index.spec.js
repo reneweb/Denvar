@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 const expect = require('chai').expect
 const dvarConsul = require('../index')
 const http = require('http')
@@ -37,6 +38,20 @@ describe('dvar-ext-consul', () => {
     }, (err, provider) => {
       provider.read((err, res) => {
         expect(res[keyToCheck]).to.equal(varToCheck)
+        done()
+      })
+    })
+  })
+
+  it('should return error if problem with server', done => {
+    dvarConsul.init({
+      host: 'localhost',
+      port: 9112,
+      secure: false,
+      keyPrefix: 'test'
+    }, (err, provider) => {
+      provider.read((err, res) => {
+        expect(err).to.be.defined
         done()
       })
     })

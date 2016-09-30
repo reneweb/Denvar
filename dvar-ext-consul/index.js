@@ -18,7 +18,7 @@ module.exports.init = (config, cb) => {
       key: keyPrefix,
       recurse: true
     }, (err, data, res) => {
-      if(err) return cb(err)
+      if (err) return cb(err)
 
       const transformedData = data.reduce((prev, curr) => {
         prev[curr.Key] = curr.Value
