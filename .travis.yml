@@ -5,4 +5,5 @@ node_js:
   - "4"
 env:
   - TEST_DIR=dvar
+  - TEST_DIR=dvar-ext-consul
 script: cd $TEST_DIR && npm install && npm test
