@@ -1,10 +1,11 @@
-#dvar-ext-consule
+#dvar-ext-consul
 
-This is a consul extension for [dvar](https://github.com/reneweb/dvar/dvar).
+This is a consul extension for dvar.
 
 ###Install
 
 `npm install dvar --save`
+
 `npm install dvar-ext-consul --save`
 
 ###Usage
