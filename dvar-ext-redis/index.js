@@ -4,7 +4,7 @@ module.exports.init = (config, cb) => {
   const redisClient = redis.createClient(config)
 
   const readF = cb => {
-    redisClient.get(config.key, cb)
+    redisClient.hgetall(config.key, cb)
   }
 
   cb(null, {read: readF})

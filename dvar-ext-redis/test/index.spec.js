@@ -14,7 +14,7 @@ describe('dvar-ext-redis', () => {
 
     redisMock.createClient = opt => {
       return {
-        get: (key, cb) => key === 'test' ? cb(null, propObj) : cb()
+        hgetall: (key, cb) => key === 'test' ? cb(null, propObj) : cb()
       }
     }
 
@@ -34,7 +34,7 @@ describe('dvar-ext-redis', () => {
     const redisMock = dvarRedis.__get__('redis')
     redisMock.createClient = opt => {
       return {
-        get: (key, cb) => cb(new Error())
+        hgetall: (key, cb) => cb(new Error())
       }
     }
 
