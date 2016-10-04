@@ -6,4 +6,5 @@ node_js:
 env:
   - TEST_DIR=dvar
   - TEST_DIR=dvar-ext-consul
+  - TEST_DIR=dvar-ext-redis
 script: cd $TEST_DIR && npm install && npm test
