@@ -1,15 +1,15 @@
-#dvar-ext-redis
+# dvar-ext-redis
 
 This is a redis extension for dvar.
 It returns the value at the given key as the config. Thus, it should be a hash.
 
-###Install
+### Install
 
 `npm install dvar --save`
 
 `npm install dvar-ext-redis --save`
 
-###Usage
+### Usage
 ```javascript
 const dvar = require('dvar')
 const dvarRedis = require('dvar-ext-redis')
