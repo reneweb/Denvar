@@ -1,4 +1,4 @@
-#dvar
+# dvar
 
 dvar is a configuration management library.
 It currently supports the following to provide the configuration:
@@ -10,7 +10,7 @@ It currently supports the following to provide the configuration:
 
 * * *
 
-###Quick Links
+### Quick Links
 * [Install](#install)
 * [Usage](#usage)
   * [Quick start](#quick-start)
@@ -27,13 +27,13 @@ It currently supports the following to provide the configuration:
 * [Override](#override)
 * [Extensions](#extensions)
 
-###Install
+### Install
 
 `npm install dvar --save`
 
-###Usage
+### Usage
 
-####Quick start
+#### Quick start
 ```javascript
 const dvar = require('dvar')
 dvar.configure([
@@ -44,7 +44,7 @@ dvar.configure([
 })
 ```
 
-####Multiple config's
+#### Multiple config's
 
 dvar takes an array of config's which makes it possible to provide config from multiple sources.
 ```javascript
@@ -140,7 +140,7 @@ dvar.configure([
 
 #### Types
 
-#####Provided
+##### Provided
 ```javascript
 const dvar = require('dvar')
 
@@ -151,7 +151,7 @@ dvar.configure([
 })
 ```
 
-#####File
+##### File
 Currently there are two formats supported:
 - json
 - property (`key=value` separated by new line)
@@ -169,7 +169,7 @@ dvar.configure([
 })
 ```
 
-#####Env
+##### Env
 ```javascript
 const dvar = require('dvar')
 
@@ -182,7 +182,7 @@ dvar.configure([
 })
 ```
 
-#####HTTP
+##### HTTP
 Currently there are two supported formats, that can be passed in the http response:
 - json
 - property (`key=value` separated by new line)
@@ -202,7 +202,7 @@ dvar.configure([
 })
 ```
 
-####Environment specific config
+#### Environment specific config
 
 Instead of providing an array to the `config` function, it is also possible to pass an object to it. The key(s) should be the environment for which the config is and the value the actual config array. Further, it is possible to provide an option `env` that is used to determine the current environment that should be used. It can be either a string or a function that returns a string with the environment.
 
@@ -219,7 +219,7 @@ dvar.configure({
 })
 ```
 
-####Dynamic reloading
+#### Dynamic reloading
 
 Dynamic reloading of the configuration can be enabled by setting the `dynamic` option to a truthy value. By default it will poll for configuration changes every minute. When setting the `dynamic` field to a object, an `interval` option (in ms) can be passed to it.
 
