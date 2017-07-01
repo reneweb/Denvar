@@ -1,4 +1,4 @@
-#dvar     [![Build Status](https://travis-ci.org/reneweb/dvar.svg?branch=master)](https://travis-ci.org/reneweb/dvar)
+# dvar     [![Build Status](https://travis-ci.org/reneweb/dvar.svg?branch=master)](https://travis-ci.org/reneweb/dvar)
 
 dvar is a configuration management library.
 
