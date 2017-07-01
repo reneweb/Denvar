@@ -1,14 +1,14 @@
-#dvar-ext-consul
+# dvar-ext-consul
 
 This is a consul extension for dvar.
 
-###Install
+### Install
 
 `npm install dvar --save`
 
 `npm install dvar-ext-consul --save`
 
-###Usage
+### Usage
 ```javascript
 const dvar = require('dvar')
 const dvarConsul = require('dvar-ext-consul')
